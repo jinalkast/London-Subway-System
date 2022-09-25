@@ -40,29 +40,37 @@ class Itinerary():
         path = []
         i = self.finish
 
+        # Go through parent list until you reach src
         while parent_list[i][0] != i:
             path.append(parent_list[i])
             i = parent_list[i][0]
 
+        # Reverse list
         return path[::-1]
 
     def printPath(self):
         i = 0
         while i < (len(self.path)):
+            stops = self.path[i][1]
 
+            # Find when line is switched
             for j in range(i + 1, len(self.path)):
                 # Line is switched
                 if self.path[j][2] != self.path[i][2]:
-                    print("Go from {} to {} using line {}".format(
-                        self.path[i][0], self.path[j][0], self.path[i][2]
+                    print("Go from {} to {} in {} stops using line {}".format(
+                        self.path[i][0], self.path[j][0], stops ,self.path[i][2]
                     ))
                     i = j
                     break
 
                 # Reached end without switching lines
                 elif j == len(self.path) - 1:
-                    print("Go from {} to {} using line {}".format(
-                        self.path[i][0], self.finish, self.path[i][2]
+                    print("Go from {} to {} in {} stops using line {}".format(
+                        self.path[i][0], self.finish, stops+self.path[j][1] ,self.path[i][2]
                     ))
                     i = j + 1
                     break
+            
+                # Num of stops accumulates
+                stops += self.path[j][1]
+
