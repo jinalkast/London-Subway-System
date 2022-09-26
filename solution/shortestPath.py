@@ -1,91 +1,60 @@
 from math import radians, cos, sin, asin, sqrt
 from solution.graph import Itinerary
-
-# Simple priority Queue
-# removeMin runs in O(n) time complexity
-
-
-class PriorityQueue():
-    def __init__(self):
-        # Queue is a dictionary to support any station having any unique id
-        self.queue = {}
-
-    def isEmpty(self):
-        return len(self.queue) == 0
-
-    def insert(self, id, dist):
-        self.queue[id] = dist
-
-    def changeVal(self, id, val):
-        self.queue[id] = val
-
-    def removeMin(self):
-        minVal = 1e7
-        minIndex = -1
-        for i in self.queue:
-            if self.queue[i] < minVal:
-                minVal = self.queue[i]
-                minIndex = i
-
-        del self.queue[minIndex]
-        return [minIndex, minVal]
-
+from solution.PriorityQueue import PriorityQueue
 
 class PathFactory():
 
     def dijkstra(graph, src, dest):
-        if not (graph.fresh):
-            graph.fresh = True  # set it so that the information
-            # is updated
-            dist = {}   # dist values used to pick minimum
-            # weight edge in cut
+        # is updated
+        dist = {}   # dist values used to pick minimum
+        # weight edge in cut
 
-            graph.parent = {}
-            graph.parent[src] = [src, 0, 0]
-            # minHeap represents set E
-            pQueue = PriorityQueue()
+        graph.parent = {}
+        graph.parent[src] = [src, 0, 0]
+        # minHeap represents set E
+        pQueue = PriorityQueue()
 
-            # Initialize min heap with all vertices.
-            # dist value of all vertices
-            for id in graph.graph:
-                dist[id] = 1e7
-                pQueue.insert(id, 1e7)
+        # Initialize min heap with all vertices.
+        # dist value of all vertices
+        for id in graph.graph:
+            dist[id] = 1e7
+            pQueue.insert(id, 1e7)
 
-            # Make dist value of src vertex as 0 so
-            # that it is extracted first
-            pQueue.changeVal(src, 0)
-            dist[src] = 0
+        # Make dist value of src vertex as 0 so
+        # that it is extracted first
+        pQueue.changeVal(src, 0)
+        dist[src] = 0
 
-            # In the following loop,
-            # min heap contains all nodes
-            # whose shortest distance is not yet finalized.
-            while pQueue.isEmpty() == False:
+        # In the following loop,
+        # min heap contains all nodes
+        # whose shortest distance is not yet finalized.
+        while pQueue.isEmpty() == False:
 
-                # Extract the vertex
-                # with minimum distance value
-                newPqueueNode = pQueue.removeMin()
-                u = newPqueueNode[0]
+            # Extract the vertex
+            # with minimum distance value
+            newPqueueNode = pQueue.removeMin()
+            u = newPqueueNode[0]
 
-                # Traverse through all adjacent vertices of
-                # u (the extracted vertex) and update their
-                # distance values
-                for neighbour in graph.graph[u].connections:
+            # Traverse through all adjacent vertices of
+            # u (the extracted vertex) and update their
+            # distance values
+            for neighbour in graph.graph[u].connections:
 
-                    neighbourID = neighbour[0]
-                    line = neighbour[1]
-                    neighbourDist = neighbour[2]
+                neighbourID = neighbour[0]
+                line = neighbour[1]
+                neighbourDist = neighbour[2]
 
-                    # Recalculate shortest distance
-                    if (
-                            neighbourID in pQueue.queue and
-                            dist[u] != 1e7 and
-                            neighbourDist + dist[u] < dist[neighbourID]):
+                # Recalculate shortest distance
+                if (
+                        neighbourID in pQueue.queue and
+                        dist[u] != 1e7 and
+                        neighbourDist + dist[u] < dist[neighbourID]):
 
-                        dist[neighbourID] = neighbourDist + dist[u]
-                        graph.parent[neighbourID] = [u, neighbourDist, line]
-                        # update distance value
-                        # in min heap also
-                        pQueue.changeVal(neighbourID, dist[neighbourID])
+                    dist[neighbourID] = neighbourDist + dist[u]
+                    graph.parent[neighbourID] = [u, neighbourDist, line]
+                    # update distance value
+                    # in min heap also
+                    pQueue.changeVal(neighbourID, dist[neighbourID])
 
         # Return itinerary
         return Itinerary(graph.parent, src, dest)
