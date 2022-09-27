@@ -25,25 +25,25 @@ def testMetricsExtractor(g):
 
 
 def testShortestPath(g):
-    print("Using Djikstras for path 9-302")
-    itinerary = PathFactory.dijkstra(g, 9, 302)
-    # itinerary.printPath()
-    print()
+    # print("Using Djikstras for path 9-302")
+    # itinerary = PathFactory.dijkstra(g, 9, 302)
+    # # itinerary.printPath()
+    # print()
 
-    print("Using A* for path 9-302")
-    itinerary2 = PathFactory.a_star(g, 9, 302)
-    #itinerary2.printPath()
-    print()
+    # print("Using A* for path 9-302")
+    # itinerary2 = PathFactory.a_star(g, 9, 302)
+    # #itinerary2.printPath()
+    # print()
 
     print("Using Djikstras for path 11-163")
-    itinerary3 = PathFactory.dijkstra(g, 11, 163)
-    # itinerary3.printPath()
+    itinerary3 = PathFactory.dijkstra(g, 28, 277)
+    itinerary3.printPath()
     print()
 
-    print("Using A* for path 11-163")
-    itinerary4 = PathFactory.a_star(g, 11, 163)
-    # itinerary4.printPath()
-    print()
+    # print("Using A* for path 11-163")
+    # itinerary4 = PathFactory.a_star(g, 11, 163)
+    # # itinerary4.printPath()
+    # print()
 
     # print("Using Djikstras for path 11-82")
     # itinerary5 = PathFactory.dijkstra(g, 11, 82)

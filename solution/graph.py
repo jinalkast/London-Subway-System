@@ -50,6 +50,12 @@ class Itinerary():
         while i < (len(self.path)):
             stops = self.path[i][1]
 
+            if i+1 == len(self.path):
+                print("Go from {} to {} in {} stops using line {}".format(
+                        self.path[i][0], self.finish, stops ,self.path[i][2]
+                    ))
+                i += 1
+            
             # Find when line is switched
             for j in range(i + 1, len(self.path)):
                 # Line is switched
