@@ -25,35 +25,35 @@ def testMetricsExtractor(g):
 
 
 def testShortestPath(g):
-    print("Using Djikstras for path 9-302")
-    itinerary = PathFactory.dijkstra(g, 9, 302)
-    itinerary.printPath()
-    print()
+    # print("Using Djikstras for path 9-302")
+    # itinerary = PathFactory.dijkstra(g, 9, 302)
+    # itinerary.printPath()
+    # print()
 
     print("Using A* for path 9-302")
     itinerary2 = PathFactory.a_star(g, 9, 302)
     itinerary2.printPath()
     print()
 
-    print("Using Djikstras for path 11-163")
-    itinerary3 = PathFactory.dijkstra(g, 11, 163)
-    itinerary3.printPath()
-    print()
+    # print("Using Djikstras for path 11-163")
+    # itinerary3 = PathFactory.dijkstra(g, 11, 163)
+    # itinerary3.printPath()
+    # print()
 
-    print("Using A* for path 11-163")
-    itinerary4 = PathFactory.a_star(g, 11, 163)
-    itinerary4.printPath()
-    print()
+    # print("Using A* for path 11-163")
+    # itinerary4 = PathFactory.a_star(g, 11, 163)
+    # itinerary4.printPath()
+    # print()
 
-    print("Using Djikstras for path 11-82")
-    itinerary5 = PathFactory.dijkstra(g, 11, 82)
-    itinerary5.printPath()
-    print()
+    # print("Using Djikstras for path 11-82")
+    # itinerary5 = PathFactory.dijkstra(g, 11, 82)
+    # itinerary5.printPath()
+    # print()
 
-    print("Using A* for path 11-82")
-    itinerary6 = PathFactory.a_star(g, 11, 82)
-    itinerary6.printPath()
-    print()
+    # print("Using A* for path 11-82")
+    # itinerary6 = PathFactory.a_star(g, 11, 82)
+    # itinerary6.printPath()
+    # print()
 
 def testCC(g):
     g.zone_list = MetricsExtractor.return_zone_list(g.graph)
@@ -61,6 +61,6 @@ def testCC(g):
     connectedComponents.printCC(g.cc)
 
 g = buildGraph()
-testMetricsExtractor(g)
+#testMetricsExtractor(g)
 testShortestPath(g)
-testCC(g)
+#testCC(g)

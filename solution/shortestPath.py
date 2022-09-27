@@ -83,7 +83,9 @@ class PathFactory():
             return (c * r)
 
         pQueue = PriorityQueue()
-
+        graph.parent = {}
+        graph.parent[src] = [src, 0, 0]
+        
         gScore = {}
         fScore = {}
 

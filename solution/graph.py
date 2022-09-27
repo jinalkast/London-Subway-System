@@ -1,3 +1,4 @@
+
 class Node():
     def __init__(self, lat, long, name, zone) -> None:
         self.lat = lat
@@ -45,12 +46,6 @@ class Itinerary():
         return path[::-1]
 
     def printPath(self):
-        if len(self.path) == 1:
-            print("Go from {} to {} in {} stops using line {}".format(
-                self.path[0][0], self.finish, self.path[0][1], self.path[0][2]
-            ))
-            return
-
         i = 0
         while i < (len(self.path)):
             stops = self.path[i][1]
@@ -60,7 +55,7 @@ class Itinerary():
                 # Line is switched
                 if self.path[j][2] != self.path[i][2]:
                     print("Go from {} to {} in {} stops using line {}".format(
-                        self.path[i][0], self.path[j][0], stops, self.path[i][2]
+                        self.path[i][0], self.path[j][0], stops ,self.path[i][2]
                     ))
                     i = j
                     break
@@ -68,11 +63,11 @@ class Itinerary():
                 # Reached end without switching lines
                 elif j == len(self.path) - 1:
                     print("Go from {} to {} in {} stops using line {}".format(
-                        self.path[i][0], self.finish, stops +
-                        self.path[j][1], self.path[i][2]
+                        self.path[i][0], self.finish, stops+self.path[j][1] ,self.path[i][2]
                     ))
                     i = j + 1
                     break
-
+            
                 # Num of stops accumulates
                 stops += self.path[j][1]
+
