@@ -59,8 +59,9 @@ class PathFactory():
                     pQueue.changeVal(neighbourID, dist[neighbourID])
 
         # Return itinerary
-        print("Nodes visited {}".format(nodes_visted))
-        print("Edges crossed {}".format(edges_crossed))
+        #print("Nodes visited {}".format(nodes_visted))
+        #print("Edges crossed {}".format(edges_crossed))
+        
         return Itinerary(graph.parent, src, dest)
 
     def a_star(graph, src, dest):
@@ -128,8 +129,8 @@ class PathFactory():
                     if neighbourID in pQueue.queue:
                         pQueue.changeVal(neighbourID, fScore[neighbourID])
 
-        print("Nodes visited {}".format(nodes_visted))
-        print("Edges crossed {}".format(edges_crossed))
+        #print("Nodes visited {}".format(nodes_visted))
+        #print("Edges crossed {}".format(edges_crossed))
 
         # Print shortest path
         return Itinerary(graph.parent, src, dest)

@@ -26,7 +26,7 @@ def testMetricsExtractor(g):
 
 def testShortestPath(g):
     print("Using Djikstras for path 9-302")
-    itinerary = PathFactory.dijkstra(g, 28, 277)
+    itinerary = PathFactory.dijkstra(g, 110, 190)
     itinerary.printPath()
     print()
 

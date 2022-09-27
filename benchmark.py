@@ -15,9 +15,17 @@ def main():
     ]
 
     values = [
-        [9, 302],
-        [11, 163],
-        [11, 82]
+        [11, 163], #1 connection, same line (0 line changes)
+        [49, 279], #2 connections, same line
+        [263, 161], #3 connections, same line
+        [263, 25], #4 connections, same line
+        [285, 99], #5 connections, same line
+        [110, 190], #6 connections, same line
+        [28, 277], #1 line change
+        [49, 254], #2 line changes
+        [56, 114], #3 line changes
+        [37, 17], #4 line changes
+        [37, 110] #5 line changes
     ]
 
     g = buildGraph()
