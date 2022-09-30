@@ -1,5 +1,6 @@
+from audioop import cross
 from collections import defaultdict
-
+from solution.metricsExtraction import MetricsExtractor
 
 class connectedComponents:
 
@@ -47,6 +48,34 @@ class connectedComponents:
             conectedComponentsAtZone[zone] = components
 
         return conectedComponentsAtZone
+
+    def generateCrossingEdges(graph):
+        crossingEdgesInZone = defaultdict(list)
+        zone_list = MetricsExtractor.return_zone_list(graph)
+        for zone in zone_list:
+            for node in zone_list[zone]:
+                for neighbour in graph[node].connections:
+
+                    # check if station is in two zones
+                    firstZone = round(graph[neighbour[0]].zone)
+                    secondZone = round(graph[neighbour[0]].zone + .1)
+
+                    # Station is in both zones
+                    if firstZone != secondZone:
+                        if zone != firstZone:
+                            crossingEdgesInZone[zone].append([node,neighbour[0],firstZone])
+                        
+                        if zone != secondZone:
+                            crossingEdgesInZone[zone].append([node,neighbour[0],secondZone])
+                    
+                    # station only in one zone
+                    else:
+                        if zone != firstZone:
+                            crossingEdgesInZone[zone].append([node,neighbour[0],firstZone])
+                            
+        return crossingEdgesInZone
+        
+
 
     def printCC(cc):
         for zone in cc:

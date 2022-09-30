@@ -51,8 +51,11 @@ def testCC(g):
     g.zone_list = MetricsExtractor.return_zone_list(g.graph)
     g.cc = connectedComponents.returnCC(g.graph, g.zone_list)
     connectedComponents.printCC(g.cc)
+    CE = connectedComponents.generateCrossingEdges(g.graph)
+    for zone in CE:
+        print(CE[zone])
 
 g = buildGraph()
-testMetricsExtractor(g)
+#testMetricsExtractor(g)
 #testShortestPath(g)
-#testCC(g)
+testCC(g)
