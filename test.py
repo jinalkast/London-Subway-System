@@ -10,12 +10,9 @@ def buildGraph():
     return GraphBuilder.build(pathToStations, pathToConnections)
 
 def testMetricsExtractor(g):
-    # print("Avg degree for each node = {}\n".format(
-    #     MetricsExtractor.compute_avg_degree(g.graph)))
-
-    # print("computing which stations are in which zone...")
 
     assert MetricsExtractor.compute_avg_degree(g.graph) == 2.6887417218543046
+
     num_of_stations_in_zone= {3:64,1:60,2:96,4:44,5:28,6:20,7:3,10:2,9:1,8:2}
     zone_list = MetricsExtractor.return_zone_list(g.graph)
     for zone in zone_list:
@@ -50,10 +47,19 @@ def testShortestPath(g):
 def testCC(g):
     g.zone_list = MetricsExtractor.return_zone_list(g.graph)
     g.cc = connectedComponents.returnCC(g.graph, g.zone_list)
-    connectedComponents.printCC(g.cc)
-    CE = connectedComponents.generateCrossingEdges(g.graph)
-    for zone in CE:
-        print(CE[zone])
+    #connectedComponents.printCC(g.cc)
+    CE = connectedComponents.generateCrossingEdgesBetweenZones(g.graph)
+    graph_of_components = GraphBuilder.buildComponentGraph(g,g.cc)
+    for component in graph_of_components.graph:
+        print("Component {} connects to:".format(component))
+        for edge in graph_of_components.graph[component].connections:
+            print("Component {} using station {} to station {}".format(edge[0],edge[1],edge[2]))
+        print()
+        
+    # for zone in CE:
+    #     print("Zone {}".format(zone))
+    #     print(CE[zone])
+    #     print()
 
 g = buildGraph()
 #testMetricsExtractor(g)

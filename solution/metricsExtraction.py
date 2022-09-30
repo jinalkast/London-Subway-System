@@ -18,6 +18,8 @@ class MetricsExtractor:
     def return_zone_list(graph):
         stationsInZone = defaultdict(set)
         for i in graph:
+            # Incase a zone is X.5, if it isn't repeat values
+            # don't get added since datatype is a set
             stationsInZone[round(graph[i].zone + .1)].add(i)
             stationsInZone[round(graph[i].zone)].add(i)
         return stationsInZone

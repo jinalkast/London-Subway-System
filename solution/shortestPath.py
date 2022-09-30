@@ -2,6 +2,7 @@ from math import radians, cos, sin, asin, sqrt
 from solution.graph import Itinerary
 from solution.PriorityQueue import PriorityQueue
 
+
 class PathFactory():
 
     def dijkstra(graph, src, dest):
@@ -13,10 +14,10 @@ class PathFactory():
 
         graph.parent = {}
         graph.parent[src] = [src, 0, 0]
-        # minHeap represents set E
+        # pqueue represents set E
         pQueue = PriorityQueue()
 
-        # Initialize min heap with all vertices.
+        # Initialize pqueue with all vertices.
         # dist value of all vertices
         for id in graph.graph:
             dist[id] = 1e7
@@ -28,10 +29,10 @@ class PathFactory():
         dist[src] = 0
 
         # In the following loop,
-        # min heap contains all nodes
+        # pqueue contains all nodes
         # whose shortest distance is not yet finalized.
         while pQueue.isEmpty() == False:
-            edges_crossed+=1
+            edges_crossed += 1
             # Extract the vertex
             # with minimum distance value
             newPqueueNode = pQueue.removeMin()
@@ -41,7 +42,7 @@ class PathFactory():
             # u (the extracted vertex) and update their
             # distance values
             for neighbour in graph.graph[u].connections:
-                nodes_visted+=1
+                nodes_visted += 1
                 neighbourID = neighbour[0]
                 line = neighbour[1]
                 neighbourDist = neighbour[2]
@@ -55,13 +56,12 @@ class PathFactory():
                     dist[neighbourID] = neighbourDist + dist[u]
                     graph.parent[neighbourID] = [u, neighbourDist, line]
                     # update distance value
-                    # in min heap also
+                    # in pqueue also
                     pQueue.changeVal(neighbourID, dist[neighbourID])
 
-        # Return itinerary
         #print("Nodes visited {}".format(nodes_visted))
         #print("Edges crossed {}".format(edges_crossed))
-        
+
         return Itinerary(graph.parent, src, dest)
 
     def a_star(graph, src, dest):
@@ -90,8 +90,6 @@ class PathFactory():
         graph.parent = {}
         graph.parent[src] = [src, 0, 0]
         pQueue = PriorityQueue()
-        graph.parent = {}
-        graph.parent[src] = [src, 0, 0]
 
         gScore = {}
         fScore = {}
@@ -99,6 +97,8 @@ class PathFactory():
         nodes_visted = 0
         edges_crossed = 0
 
+        # Initialize pqueue with all vertices.
+        # dist value of all vertices
         for id in graph.graph:
             gScore[id] = 1e7
             fScore[id] = 1e7
@@ -108,17 +108,24 @@ class PathFactory():
         gScore[src] = 0
         fScore[src] = 0
 
+        # In the following loop,
+        # pqueue contains all nodes
+        # whose shortest distance is not yet finalized.
         while pQueue.isEmpty() == False:
-            edges_crossed+=1
+            edges_crossed += 1
             pQueueNode = pQueue.removeMin()
             current = pQueueNode[0]
 
+            # Traverse through all adjacent vertices of
+            # u (the extracted vertex) and update their
+            # distance values
             for neighbour in graph.graph[current].connections:
-                nodes_visted+=1
+                nodes_visted += 1
                 neighbourID, line, neighbourDist = neighbour[0], neighbour[1], neighbour[2]
 
                 temp_gScore = gScore[current] + neighbourDist
 
+                # Recalculate shortest distance
                 if temp_gScore < gScore[neighbourID]:
                     gScore[neighbourID] = temp_gScore
                     fScore[neighbourID] = temp_gScore + \
@@ -132,5 +139,4 @@ class PathFactory():
         #print("Nodes visited {}".format(nodes_visted))
         #print("Edges crossed {}".format(edges_crossed))
 
-        # Print shortest path
         return Itinerary(graph.parent, src, dest)
