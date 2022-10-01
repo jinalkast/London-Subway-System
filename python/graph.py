@@ -43,6 +43,7 @@ class Itinerary():
         self.start = start
         self.finish = finish
         self.path = self.compute_path(parent_list)
+        self.total_path_length = sum(i[1] for i in self.path)
 
     # Computes route given parent list
     def compute_path(self, parent_list):

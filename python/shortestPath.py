@@ -1,6 +1,6 @@
 from math import radians, cos, sin, asin, sqrt
-from solution.graph import Itinerary
-from solution.PriorityQueue import PriorityQueue
+from python.graph import Itinerary
+from python.PriorityQueue import PriorityQueue
 
 
 class PathFactory():

@@ -1,7 +1,7 @@
 import pyperf
 
-from solution.buildGraph import GraphBuilder
-from solution.shortestPath import PathFactory
+from python.buildGraph import GraphBuilder
+from python.shortestPath import PathFactory
 
 def buildGraph():
     pathToStations = "_dataset/london.stations.csv"
