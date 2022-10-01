@@ -58,6 +58,13 @@ class Itinerary():
         # Reverse list
         return path[::-1]
 
+    def combine_itineraries(i1,i2):
+        i1.finish = i2.finish
+        for i in i2.path:
+            i1.path.append(i)
+        i1.total_path_length += i2.total_path_length
+        return i1
+
     def printPath(self):
         i = 0
         while i < (len(self.path)):

@@ -2,7 +2,7 @@ from python.buildGraph import GraphBuilder
 from python.PriorityQueue import PriorityQueue
 from python.shortestPath import PathFactory
 from python.metricsExtraction import MetricsExtractor
-from python.planning import connectedComponents
+from python.connectedComponents import connectedComponents
 from python.util import Util
 
 def test_buildGraph():

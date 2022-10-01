@@ -1,8 +1,9 @@
-from solution.shortestPath import PathFactory
-from solution.buildGraph import GraphBuilder
-from solution.planning import connectedComponents
-from solution.metricsExtraction import MetricsExtractor
-
+from python.graph import Itinerary
+from python.shortestPath import PathFactory
+from python.buildGraph import GraphBuilder
+from python.connectedComponents import connectedComponents
+from python.metricsExtraction import MetricsExtractor
+from python.subway_patrol import SubwayPatrol
 
 def buildGraph():
     pathToStations = "_dataset/london.stations.csv"
@@ -85,5 +86,9 @@ def testCC():
 
 
 # testMetricsExtractor(g)
-# testShortestPath(g)
-testCC()
+# testShortestPath()
+# testCC()
+g = buildGraph()
+i= SubwayPatrol.travellingSalesmanProblem(g,[5,24,63,128,1])
+
+i.printPath()
