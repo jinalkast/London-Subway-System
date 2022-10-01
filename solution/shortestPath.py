@@ -31,7 +31,7 @@ class PathFactory():
         # In the following loop,
         # pqueue contains all nodes
         # whose shortest distance is not yet finalized.
-        while pQueue.isEmpty() == False:
+        while not pQueue.isEmpty():
             edges_crossed += 1
             # Extract the vertex
             # with minimum distance value
@@ -59,8 +59,8 @@ class PathFactory():
                     # in pqueue also
                     pQueue.changeVal(neighbourID, dist[neighbourID])
 
-        #print("Nodes visited {}".format(nodes_visted))
-        #print("Edges crossed {}".format(edges_crossed))
+        # print("Nodes visited {}".format(nodes_visted))
+        # print("Edges crossed {}".format(edges_crossed))
 
         return Itinerary(graph.parent, src, dest)
 
@@ -111,7 +111,7 @@ class PathFactory():
         # In the following loop,
         # pqueue contains all nodes
         # whose shortest distance is not yet finalized.
-        while pQueue.isEmpty() == False:
+        while not pQueue.isEmpty():
             edges_crossed += 1
             pQueueNode = pQueue.removeMin()
             current = pQueueNode[0]
@@ -121,7 +121,9 @@ class PathFactory():
             # distance values
             for neighbour in graph.graph[current].connections:
                 nodes_visted += 1
-                neighbourID, line, neighbourDist = neighbour[0], neighbour[1], neighbour[2]
+                neighbourID = neighbour[0]
+                line = neighbour[1]
+                neighbourDist = neighbour[2]
 
                 temp_gScore = gScore[current] + neighbourDist
 
@@ -136,7 +138,7 @@ class PathFactory():
                     if neighbourID in pQueue.queue:
                         pQueue.changeVal(neighbourID, fScore[neighbourID])
 
-        #print("Nodes visited {}".format(nodes_visted))
-        #print("Edges crossed {}".format(edges_crossed))
+        # print("Nodes visited {}".format(nodes_visted))
+        # print("Edges crossed {}".format(edges_crossed))
 
         return Itinerary(graph.parent, src, dest)

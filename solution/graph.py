@@ -74,7 +74,7 @@ class Itinerary():
             for j in range(i + 1, len(self.path)):
                 # Line is switched
                 if self.path[j][2] != self.path[i][2]:
-                    print("Go from {} to {} in {} stops using line {}".format(
+                    print("Go from {} to {} in {} stops with line {}".format(
                         self.path[i][0], self.path[j][0], stops, self.path[i][2]
                     ))
                     i = j

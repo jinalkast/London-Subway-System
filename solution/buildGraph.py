@@ -1,5 +1,5 @@
 import csv
-from solution.graph import Graph, Node
+from solution.graph import Graph
 from collections import defaultdict
 
 
@@ -77,4 +77,4 @@ class GraphBuilder():
                                     i, component_dest, node, neighbour[0])
                 i += 1
 
-        return graph_of_components
+        return [componentsHolding, graph_of_components]

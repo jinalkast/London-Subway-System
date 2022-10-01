@@ -1,8 +1,5 @@
-from audioop import cross
 from collections import defaultdict
 from solution.metricsExtraction import MetricsExtractor
-from solution.graph import Graph, Node
-from solution.buildGraph import GraphBuilder
 
 
 class connectedComponents:
@@ -23,7 +20,7 @@ class connectedComponents:
             temp.append(vertex)
             for i in graph[vertex].connections:
                 # Check if neighbour is in the appropriate zone
-                if (i[0] in zone_list[zone]) and (visited[i[0]] == False):
+                if (i[0] in zone_list[zone]) and (not visited[i[0]]):
                     visited[i[0]] = True
                     stack.append(i[0])
                     temp.append(i[0])
@@ -47,7 +44,7 @@ class connectedComponents:
                 if not visited[v]:
                     components.append(
                         connectedComponents.DFSUtil(
-                            graph, [], v, visited, zone, zone_list))
+                            graph.graph, [], v, visited, zone, zone_list))
             conectedComponentsAtZone[zone] = components
 
         return conectedComponentsAtZone
@@ -59,11 +56,11 @@ class connectedComponents:
         # Go through each node in each zone, check if
         for zone in zone_list:
             for node in zone_list[zone]:
-                for neighbour in graph[node].connections:
+                for neighbour in graph.graph[node].connections:
 
                     # check if station is in two zones
-                    firstZone = round(graph[neighbour[0]].zone)
-                    secondZone = round(graph[neighbour[0]].zone + .1)
+                    firstZone = round(graph.graph[neighbour[0]].zone)
+                    secondZone = round(graph.graph[neighbour[0]].zone + .1)
 
                     # Station is in two zones
                     if firstZone != secondZone:
@@ -88,10 +85,3 @@ class connectedComponents:
                                 [node, neighbour[0], firstZone])
 
         return crossingEdgesInZone
-
-    def printCC(cc):
-        for zone in cc:
-            print("Zone {} has components(s):".format(zone))
-            for island in cc[zone]:
-                print(" " + str(island))
-            print()
