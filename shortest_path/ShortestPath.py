@@ -67,8 +67,7 @@ class PathFactory():
     def a_star(graph, src, dest):
 
         def hScore(src, dest):
-            # The math module contains a function named
-            # radians which converts from degrees to radians.
+            # Convert from degrees to radians
             lon1 = radians(graph.graph[src].long)
             lon2 = radians(graph.graph[dest].long)
             lat1 = radians(graph.graph[src].lat)
@@ -81,10 +80,9 @@ class PathFactory():
 
             c = 2 * asin(sqrt(a))
 
-            # Radius of earth in kilometers. Use 3956 for miles
+            # Radius of earth in kilometers
             r = 6371
 
-            # calculate the result
             return (c * r)
 
         graph.parent = {}
