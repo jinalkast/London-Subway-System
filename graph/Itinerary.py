@@ -1,43 +1,3 @@
-# Node class used by graph
-class Node():
-    def __init__(self, lat, long, name, zone) -> None:
-        self.lat = lat
-        self.long = long
-        self.name = name
-        self.connections = []
-        self.zone = zone
-
-
-class Graph():
-    def __init__(self):
-        # Graph contains list of nodes
-        # Parent contains stored solution to shortest path problem
-        self.graph = {}
-        self.parent = {}
-
-    def add_station(self, id, lat, long, name, zone):
-        # Assumes correct datatypes
-        # Also this works as an override
-        self.graph[id] = Node(lat, long, name, zone)
-
-    def add_line(self, src, dest, line, weight):
-        # Assumes correct datatypes
-        # Does not override
-        if [dest, line, weight] not in self.graph[src].connections:
-            self.graph[src].connections.append([dest, line, weight])
-
-    def add_component_edge(
-            self,
-            starting_comp,
-            ending_comp,
-            starting_station,
-            ending_station):
-        if [ending_comp, starting_station,
-                ending_station] not in self.graph[starting_comp].connections:
-            self.graph[starting_comp].connections.append(
-                [ending_comp, starting_station, ending_station])
-
-
 class Itinerary():
     def __init__(self, parent_list, start, finish):
         self.start = start
@@ -58,7 +18,7 @@ class Itinerary():
         # Reverse list
         return path[::-1]
 
-    def combine_itineraries(i1,i2):
+    def combine_itineraries(i1, i2):
         i1.finish = i2.finish
         for i in i2.path:
             i1.path.append(i)
@@ -83,7 +43,8 @@ class Itinerary():
                 # Line is switched
                 if self.path[j][2] != self.path[i][2]:
                     print("Go from {} to {} in {} stops with line {}".format(
-                        self.path[i][0], self.path[j][0], stops, self.path[i][2]
+                        self.path[i][0], self.path[j][0],
+                        stops, self.path[i][2]
                     ))
                     i = j
                     break

@@ -1,4 +1,4 @@
-from python.existingStationNames import first_part, second_part
+from util.ExistingStationNames import first_part, second_part
 from random import choice
 
 

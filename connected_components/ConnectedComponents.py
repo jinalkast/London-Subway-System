@@ -1,5 +1,5 @@
 from collections import defaultdict
-from python.metricsExtraction import MetricsExtractor
+from metrics_extractor.MetricsExtractor import MetricsExtractor
 
 
 class connectedComponents:
